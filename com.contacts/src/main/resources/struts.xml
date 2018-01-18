@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.devMode" value="true" />
+       <package name="default" extends="struts-default">
+      
+      <interceptors>
+    <interceptor name="sessionmanage" class="com.contacts.interceptors.SessionInterceptor" />
+    <interceptor-stack name="appStack">  
+         <interceptor-ref name="defaultStack"/>
+         <interceptor-ref name="sessionmanage"/> 
+    </interceptor-stack> 
+    </interceptors>
+    <default-interceptor-ref name="appStack"></default-interceptor-ref>
+     <global-results>
+<result name="login">/login.jsp</result>
+</global-results>
+            <action name="">
+            <result>/signup.jsp</result>
+        </action>
+        <action name="signup">
+           <result>/signup.jsp</result>
+        </action>
+        <action name="signup_action" class="com.contacts.actions.SignupAction" method="execute">
+        <result name="input">/signup.jsp</result>
+            <result name="success">/success_signup.jsp</result>
+        </action>
+          <action name="login">
+           <result>/login.jsp</result>
+        </action>
+        <action name="login_action" class="com.contacts.actions.LoginAction" method="execute">
+        <result name="input">/login.jsp</result>
+            <result name="success">/home.jsp</result>
+        </action>
+        <action name="add_contact_action" class="com.contacts.actions.AddContactAction" method="execute">
+        <result name="input">/add_contact.jsp</result>
+            <result name="success">/home.jsp</result>
+        </action>
+          <action name="all_view_action" class="com.contacts.actions.ViewContactAction" method="execute">
+        <result name="input">/home.jsp</result>
+            <result name="success">/view_contact.jsp</result>
+        </action>
+         <action name="delete_contact" class="com.contacts.actions.DeleteContactAction" method="execute">
+        <result name="input">/view_contact.jsp</result>
+            <result name="success" type="chain">all_view_action</result>
+        </action>
+        <action name="edit_contact" class="com.contacts.actions.UpdateContactAction" method="createForm">
+        <result name="input">/view_contact.jsp</result>
+            <result name="success">/update_contact.jsp</result>
+        </action>
+        <action name="delete_phone" class="com.contacts.actions.DeletePhoneNoAction" method="deletePhoneno">
+        <result name="input">/update_contact.jsp</result>
+           <result name="success" type="redirectAction">
+        <param name="actionName">edit_contact</param>
+        <param name="contactid">${contactid}</param>
+      </result>
+      </action>
+       <action name="update_phone" class="com.contacts.actions.UpdatePhoneNoAction" method="updatePhoneno">
+        <result name="input">/update_contact.jsp</result>
+           <result name="success" type="redirectAction">
+        <param name="actionName">edit_contact</param>
+        <param name="contactid">${contactid}</param>
+      </result>
+      </action>
+         <action name="update_contact" class="com.contacts.actions.UpdateContactAction" method="processForm">
+        <result name="input">/update_contact.jsp</result>
+            <result name="success" type="redirectAction">
+        <param name="actionName">edit_contact</param>
+        <param name="contactid">${contactid}</param>
+      </result>
+        </action>
+            <action name="home">
+           <result type="redirect">/home.jsp</result>       
+            </action>
+            <action name="logout_action" class="com.contacts.actions.LogoutAction" method="execute">
+        <result name="success">/login.jsp</result>
+            </action>
+   </package>
+</struts>
+
