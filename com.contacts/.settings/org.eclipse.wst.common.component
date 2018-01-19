@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="java-output-path" value="/com.contacts/target/classes"/>
-        <property name="context-root" value="contact_managment"/>
+        <property name="java-output-path" value="/contact_managment/target/classes"/>
+        <property name="context-root" value="com.contacts"/>
     </wb-module>
 </project-modules>
